@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   @IBOutlet weak var tableView: UITableView!
@@ -23,6 +24,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     tableView.dataSource = self
     tableView.delegate = self
 
+    showLoadingIndicator()
     fetchMovies()
   }
 
@@ -40,7 +42,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    print("tableView")
     let movie = movies![indexPath.row]
     let title = movie["title"] as! String
     let overview = movie["overview"] as! String
@@ -56,6 +57,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     return cell
   }
 
+  func showLoadingIndicator() {
+    MBProgressHUD.showAdded(to: view, animated:true)
+  }
+
+  func hideLoadingIndicator() {
+    MBProgressHUD.hide(for: view, animated: true)
+  }
+
   func fetchMovies() {
     let urlString = "https://api.themoviedb.org/3/movie/\(apiResource!)?api_key=\(apiKey)"
     let url = URL(string: urlString)
@@ -69,26 +78,25 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
       delegate: nil,
       delegateQueue: OperationQueue.main)
 
-    let task: URLSessionDataTask = session.dataTask(with: request as URLRequest,
-                                                    completionHandler: { (dataOrNil, response, error) in
-                                                      if let data = dataOrNil {
-                                                        if let responseDictionary = try! JSONSerialization.jsonObject(
-                                                          with: data, options:[]) as? NSDictionary {
-                                                          print("response: \(responseDictionary)")
-                                                          self.movies = responseDictionary["results"] as? [NSDictionary]
-                                                          self.tableView.reloadData()
-                                                        }
-                                                      }
+    let task: URLSessionDataTask = session.dataTask(with: request as URLRequest, completionHandler: {
+      (dataOrNil, response, error) in
+        if let data = dataOrNil {
+          if let responseDictionary = try! JSONSerialization.jsonObject(
+            with: data, options:[]) as? NSDictionary {
+            print("response: \(responseDictionary)")
+            self.movies = responseDictionary["results"] as? [NSDictionary]
+            self.tableView.reloadData()
+          }
+        }
+        self.hideLoadingIndicator()
     })
     task.resume()
   }
 
   func didRefresh() {
-    print("didRefresh")
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    print("prepare called")
     let cell = sender as! UITableViewCell
     let indexPath = tableView.indexPath(for: cell)
     let movie = movies![(indexPath!.row)]

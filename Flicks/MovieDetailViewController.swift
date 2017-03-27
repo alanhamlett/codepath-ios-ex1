@@ -22,7 +22,6 @@ class MovieDetailViewController: UIViewController {
 
     titleLabel.text = movie["title"] as! String
     overviewLabel.text = movie["overview"] as! String
-    overviewLabel.sizeToFit()
 
     let posterBaseUrl = "https://image.tmdb.org/t/p/w500"
     if let posterPath = movie["poster_path"] as? String {
@@ -30,7 +29,10 @@ class MovieDetailViewController: UIViewController {
       posterImage.setImageWith(posterUrl as! URL)
     }
 
-    scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
+    scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + titleLabel.frame.size.height + overviewLabel.frame.size.height)
+    print(infoView.frame.origin.y + titleLabel.frame.size.height + overviewLabel.frame.size.height)
+
+    overviewLabel.sizeToFit()
 
   }
 
