@@ -21,10 +21,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: #selector(refreshControlAction), for: UIControlEvents.valueChanged)
+    tableView.insertSubview(refreshControl, at: 0)
+
     tableView.dataSource = self
     tableView.delegate = self
 
-    showLoadingIndicator()
     fetchMovies()
   }
 
@@ -66,6 +69,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   }
 
   func fetchMovies() {
+    showLoadingIndicator()
     let urlString = "https://api.themoviedb.org/3/movie/\(apiResource!)?api_key=\(apiKey)"
     let url = URL(string: urlString)
     let request = NSURLRequest(
@@ -83,7 +87,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         if let data = dataOrNil {
           if let responseDictionary = try! JSONSerialization.jsonObject(
             with: data, options:[]) as? NSDictionary {
-            print("response: \(responseDictionary)")
+            //print("response: \(responseDictionary)")
             self.movies = responseDictionary["results"] as? [NSDictionary]
             self.tableView.reloadData()
           }
@@ -93,8 +97,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     task.resume()
   }
 
+  func refreshControlAction(_ refreshControl: UIRefreshControl) {
+    fetchMovies()
+    refreshControl.endRefreshing()
+  }
+
   func didRefresh() {
   }
+
+
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let cell = sender as! UITableViewCell
