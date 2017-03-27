@@ -50,7 +50,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="imageView" destination="hJd-p7-RHF" id="qgk-Qt-UnL"/>
                                             <outlet property="moviePosterView" destination="hJd-p7-RHF" id="Dcv-SO-YZL"/>
                                             <outlet property="overviewLabel" destination="zwK-7M-QQd" id="QNC-Sr-OUt"/>
                                             <outlet property="titleLabel" destination="gKG-Ye-B3G" id="v5W-rx-fK6"/>

@@ -71,7 +71,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     if let posterPath = movie["poster_path"] as? String {
       let posterUrl = NSURL(string:posterBaseUrl + posterPath)
       cell.moviePosterView.setImageWith(posterUrl as! URL)
-      cell.layoutIfNeeded()
     }
 
     return cell
