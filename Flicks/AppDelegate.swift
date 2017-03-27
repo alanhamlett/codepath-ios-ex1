@@ -24,16 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let nowPlayingVC = nowPlayingNav.topViewController as! MoviesViewController
     nowPlayingVC.apiResource = "now_playing"
     nowPlayingNav.tabBarItem.title = "Now Playing"
-    let nowPlayingIcon = UIImage(named: "camera")
-    nowPlayingIcon?.draw(in: CGRect(x: 0, y: 0, width: 10, height: 10))
+    let nowPlayingIcon = UIImage(named: "camera")!
+    nowPlayingIcon.draw(in: CGRect(x: 0, y: 0, width: 10, height: 10))
     nowPlayingNav.tabBarItem.image = nowPlayingIcon
 
     let topRatedNav = storyboard.instantiateViewController(withIdentifier: "MoviesNavigationController") as! UINavigationController
     let topRatedVC = topRatedNav.topViewController as! MoviesViewController
     topRatedVC.apiResource = "top_rated"
     topRatedNav.tabBarItem.title = "Top Rated"
-    let topRatedIcon = UIImage(named: "star")
-    topRatedIcon?.draw(in: CGRect(x: 0, y: 0, width: 10, height: 10))
+    let topRatedIcon = UIImage(named: "star")!
+    topRatedIcon.draw(in: CGRect(x: 0, y: 0, width: 10, height: 10))
     topRatedNav.tabBarItem.image = topRatedIcon
 
     let tabBarController = UITabBarController()
