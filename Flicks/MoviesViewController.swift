@@ -13,6 +13,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   @IBOutlet weak var tableView: UITableView!
 
   var movies: [NSDictionary]?
+  var apiResource: String!
+
+  var apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,30 +23,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     tableView.dataSource = self
     tableView.delegate = self
 
-    let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-    let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
-    let request = NSURLRequest(
-      url: url! as URL,
-      cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData,
-      timeoutInterval: 10)
-
-    let session = URLSession(
-      configuration: URLSessionConfiguration.default,
-      delegate: nil,
-      delegateQueue: OperationQueue.main)
-
-    let task: URLSessionDataTask = session.dataTask(with: request as URLRequest,
-      completionHandler: { (dataOrNil, response, error) in
-        if let data = dataOrNil {
-          if let responseDictionary = try! JSONSerialization.jsonObject(
-            with: data, options:[]) as? NSDictionary {
-            print("response: \(responseDictionary)")
-            self.movies = responseDictionary["results"] as? [NSDictionary]
-            self.tableView.reloadData()
-          }
-        }
-    })
-    task.resume()
+    fetchMovies()
   }
 
   override func didReceiveMemoryWarning() {
@@ -74,6 +54,33 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     return cell
+  }
+
+  func fetchMovies() {
+    let urlString = "https://api.themoviedb.org/3/movie/\(apiResource!)?api_key=\(apiKey)"
+    let url = URL(string: urlString)
+    let request = NSURLRequest(
+      url: url! as URL,
+      cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData,
+      timeoutInterval: 10)
+
+    let session = URLSession(
+      configuration: URLSessionConfiguration.default,
+      delegate: nil,
+      delegateQueue: OperationQueue.main)
+
+    let task: URLSessionDataTask = session.dataTask(with: request as URLRequest,
+                                                    completionHandler: { (dataOrNil, response, error) in
+                                                      if let data = dataOrNil {
+                                                        if let responseDictionary = try! JSONSerialization.jsonObject(
+                                                          with: data, options:[]) as? NSDictionary {
+                                                          print("response: \(responseDictionary)")
+                                                          self.movies = responseDictionary["results"] as? [NSDictionary]
+                                                          self.tableView.reloadData()
+                                                        }
+                                                      }
+    })
+    task.resume()
   }
 
   func didRefresh() {
