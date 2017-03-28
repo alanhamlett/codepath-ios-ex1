@@ -1,6 +1,6 @@
 # Flicks - Assignment 1
 
-Displays movie posters from TheMovieDB.org
+Displays movie posters from [TheMovieDB.org][tmdb].
 
 Submitted by: Alan Hamlett
 
@@ -10,10 +10,10 @@ Time spent: [coming soon][time spent coding]
 
 The following **required** functionality is complete:
 
-* [X] User can view a list of movies currently playing in theaters from The Movie Database. Poster images must be loaded asynchronously.
+* [X] User can view a list of movies currently playing in theaters from [The Movie Database][tmdb]. Poster images must be loaded asynchronously.
 * [X] User can view movie details by tapping on a cell.
 * [X] User sees loading state while waiting for movies API. You can use one of the 3rd party libraries listed on CocoaControls.
-* [ ] User sees an error message when there's a networking error. You may not use UIAlertController or a 3rd party library to display the error. See this screenshot for what the error message should look like.
+* [ ] User sees an error message when there's a networking error. You may not use UIAlertController or a 3rd party library to display the error. See [this screenshot][error msg] for what the error message should look like.
 * [X] User can pull to refresh the movie list.
 * [X] Add a tab bar for Now Playing or Top Rated movies.
 
@@ -60,4 +60,6 @@ Challenges encountered while building the app:
     limitations under the License.
 
 
-[time spent coding]: https://wakatime.com/@alan/projects/xmwcivswel?start=2017-03-26&end=2017-03-27
+[time spent coding]: https://wakatime.com/@alan/projects/xmwcivswel?start=2017-03-26&end=2017-03-27(https://developers.themoviedb.org/3)
+[tmdb]: https://developers.themoviedb.org/3
+[error msg]: http://forums.androidcentral.com/attachments/google-nexus-10-tablet/51236d1355614625t-facebook-network-error-no-internet-connection-screenshot_2012-12-15-15-15-05.png
