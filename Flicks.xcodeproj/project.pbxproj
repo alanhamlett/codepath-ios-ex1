@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3611FF131E88930F00B3C037 /* MovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3611FF121E88930F00B3C037 /* MovieViewCell.swift */; };
 		3611FF161E88AE2300B3C037 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3611FF151E88AE2200B3C037 /* MovieDetailViewController.swift */; };
+		3611FF1C1E8A0BD700B3C037 /* MainErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3611FF1B1E8A0BD700B3C037 /* MainErrorView.swift */; };
 		36D2C29F1E886B9E00FCD4A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D2C29E1E886B9E00FCD4A6 /* AppDelegate.swift */; };
 		36D2C2A41E886B9E00FCD4A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D2C2A21E886B9E00FCD4A6 /* Main.storyboard */; };
 		36D2C2A61E886B9E00FCD4A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D2C2A51E886B9E00FCD4A6 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		3611FF121E88930F00B3C037 /* MovieViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewCell.swift; sourceTree = "<group>"; };
 		3611FF151E88AE2200B3C037 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		3611FF1B1E8A0BD700B3C037 /* MainErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainErrorView.swift; sourceTree = "<group>"; };
 		36D2C29B1E886B9E00FCD4A6 /* Flicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D2C29E1E886B9E00FCD4A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36D2C2A31E886B9E00FCD4A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 			isa = PBXGroup;
 			children = (
 				3611FF121E88930F00B3C037 /* MovieViewCell.swift */,
+				3611FF1B1E8A0BD700B3C037 /* MainErrorView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			files = (
 				3611FF161E88AE2300B3C037 /* MovieDetailViewController.swift in Sources */,
 				36D2C29F1E886B9E00FCD4A6 /* AppDelegate.swift in Sources */,
+				3611FF1C1E8A0BD700B3C037 /* MainErrorView.swift in Sources */,
 				36D2C2B11E886C6000FCD4A6 /* MoviesViewController.swift in Sources */,
 				3611FF131E88930F00B3C037 /* MovieViewCell.swift in Sources */,
 			);

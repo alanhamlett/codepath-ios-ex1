@@ -4,7 +4,7 @@ Displays movie posters from [TheMovieDB.org][tmdb].
 
 Submitted by: Alan Hamlett
 
-Time spent: [coming soon][time spent coding]
+Time spent: [14 hrs 51 mins][time spent coding]
 
 ## User Stories
 
@@ -13,7 +13,7 @@ The following **required** functionality is complete:
 * [X] User can view a list of movies currently playing in theaters from [The Movie Database][tmdb]. Poster images must be loaded asynchronously.
 * [X] User can view movie details by tapping on a cell.
 * [X] User sees loading state while waiting for movies API. You can use one of the 3rd party libraries listed on CocoaControls.
-* [ ] User sees an error message when there's a networking error. You may not use UIAlertController or a 3rd party library to display the error. See [this screenshot][error msg] for what the error message should look like.
+* [X] User sees an error message when there's a networking error. You may not use UIAlertController or a 3rd party library to display the error. See [this screenshot][error msg] for what the error message should look like.
 * [X] User can pull to refresh the movie list.
 * [X] Add a tab bar for Now Playing or Top Rated movies.
 
@@ -40,8 +40,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 Challenges encountered while building the app:
 
 * Most of my time was spent trying to display the error message in a fixed
-  `UIView` on network errors. I could never get the view to display over the
-  `UITableView`.
+  `UIView` on network errors. It was very hard to get the error view to display
+  over the `UITableView`.
 
 ## License
 

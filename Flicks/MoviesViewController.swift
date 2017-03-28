@@ -15,6 +15,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
   var movies: [NSDictionary]?
   var apiResource: String!
+  var errorHeaderView: UIView?
 
   var apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 
@@ -27,6 +28,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     tableView.dataSource = self
     tableView.delegate = self
+
+    setupErrorView()
 
     fetchMovies()
   }
@@ -68,7 +71,29 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     MBProgressHUD.hide(for: view, animated: true)
   }
 
+  func setupErrorView() {
+    errorHeaderView = MainErrorView(frame: CGRect(x: 0, y: 60, width: 375, height: 60))
+    errorHeaderView?.backgroundColor = UIColor.black
+    errorHeaderView?.isHidden = true
+    view.addSubview(errorHeaderView!)
+    errorHeaderView?.setNeedsDisplay()
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: (errorHeaderView?.frame.size.width)!, height: (errorHeaderView?.frame.size.height)!))
+    label.textAlignment = NSTextAlignment.center
+    label.textColor = UIColor.white
+    label.text = "Networking Error"
+    errorHeaderView?.addSubview(label)
+  }
+
+  func showError() {
+    errorHeaderView?.isHidden = false
+  }
+
+  func hideError() {
+    errorHeaderView?.isHidden = true
+  }
+
   func fetchMovies() {
+    hideError()
     showLoadingIndicator()
     let urlString = "https://api.themoviedb.org/3/movie/\(apiResource!)?api_key=\(apiKey)"
     let url = URL(string: urlString)
@@ -84,15 +109,19 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     let task: URLSessionDataTask = session.dataTask(with: request as URLRequest, completionHandler: {
       (dataOrNil, response, error) in
+        self.hideLoadingIndicator()
         if let data = dataOrNil {
           if let responseDictionary = try! JSONSerialization.jsonObject(
             with: data, options:[]) as? NSDictionary {
             //print("response: \(responseDictionary)")
             self.movies = responseDictionary["results"] as? [NSDictionary]
             self.tableView.reloadData()
+          } else {
+            self.showError()
           }
+        } else {
+          self.showError()
         }
-        self.hideLoadingIndicator()
     })
     task.resume()
   }
@@ -101,11 +130,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     fetchMovies()
     refreshControl.endRefreshing()
   }
-
-  func didRefresh() {
-  }
-
-
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let cell = sender as! UITableViewCell
